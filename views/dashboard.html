@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h2 class="logo">Job Tracker</h2>
+            <ul>
+                <li><a href="/dashboard.html">🏠 Home</a></li>
+                <li><a href="/trackers.html">📌 Trackers</a></li>
+                <li><a href="/companies.html" class="active">🏢 Companies</a></li>
+                <li><a href="/account.html">⚙️ Account Settings</a></li>
+                <li><button id="logout-btn">🚪 Logout</button></li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <h2>Welcome, <span id="user-name">User</span>!</h2>
+            <div class="search-filter-container">
+                <input type="text" id="search-input" placeholder="Search by job title or company...">
+                
+                <select id="status-filter">
+                    <option value="">All Statuses</option>
+                    <option value="Applied">Applied</option>
+                    <option value="Interview Scheduled">Interview Scheduled</option>
+                    <option value="Offer Received">Offer Received</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+                
+                <button id="search-btn">Search</button>
+            </div>
+            
+            <ul id="applications-list">
+                <!-- Job applications will be dynamically inserted here -->
+            </ul>
+            
+            <div class="stats-container">
+                <div class="stat-box">
+                    <h3>Total Applications</h3>
+                    <p id="total-applications">0</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Interviews Scheduled</h3>
+                    <p id="interview-count">0</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Offers Received</h3>
+                    <p id="offer-count">0</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Rejections</h3>
+                    <p id="rejection-count">0</p>
+                </div>
+            </div>
+        
+            <div class="chart-container">
+                <canvas id="application-chart"></canvas>
+            </div> <!-- Chart.js Graph -->
+        
+            <h3>Your Job Applications</h3>
+            <ul id="applications-list"></ul>
+        
+            <h3>Upcoming Follow-Up Reminders</h3>
+            <ul id="reminder-list"></ul>
+        </div>
+        
+    </div>
+    <script src="/js/chart.js"></script>
+
+    <script src="/js/dashboard.js"></script>
+</body>
+
+</html>

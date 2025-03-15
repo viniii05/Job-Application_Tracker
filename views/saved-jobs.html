@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Jobs</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Saved Jobs</h2>
+
+        <form id="job-form">
+            <input type="text" id="job-title" placeholder="Job Title" required>
+            <input type="text" id="job-company" placeholder="Company Name" required>
+            <input type="url" id="job-url" placeholder="Job URL">
+            <button type="submit">Save Job</button>
+        </form>
+
+        <h3>Your Saved Jobs</h3>
+        <ul id="job-list"></ul>
+    </div>
+
+    <script src="/js/saved-jobs.js"></script>
+</body>
+</html>

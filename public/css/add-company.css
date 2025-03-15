@@ -1,0 +1,202 @@
+/* Base styles and reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: cursive;
+  }
+  
+  :root {
+    --primary: #4f46e5;
+    --primary-dark: #4338ca;
+    --secondary: #f9fafb;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --sidebar-bg: #f3f4f6;
+    --sidebar-active: #e0e7ff;
+    --sidebar-width: 250px;
+    --border-color: #e5e7eb;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #3b82f6;
+    --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+  }
+  
+  body {
+    background-color: #f9fafb;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  
+  /* Dashboard layout */
+  .dashboard-container {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* Sidebar styles */
+  .sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--sidebar-bg);
+    padding: 1.5rem;
+    position: fixed;
+    height: 100vh;
+    box-shadow: 1px 0 5px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+    overflow-y: auto;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .sidebar ul {
+    list-style: none;
+  }
+  
+  .sidebar li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .sidebar a, .sidebar button {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .sidebar a:hover, .sidebar button:hover {
+    background-color: rgba(79, 70, 229, 0.1);
+    color: var(--primary);
+  }
+  
+  .sidebar a.active {
+    background-color: var(--sidebar-active);
+    color: var(--primary);
+    font-weight: 600;
+  }
+  
+  #logout-btn {
+    color: var(--danger);
+  }
+  
+  #logout-btn:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+  }
+
+/* Main Content Styling */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 250px);
+    height: 100vh;
+}
+
+/* Glassmorphism Form */
+form {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    text-align: left;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #322c2c;
+    margin-bottom: 20px;
+}
+
+/* Input Fields */
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background: transparent;
+    color: white;
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+input:focus,
+textarea:focus {
+    border-bottom: 2px solid #1abc9c;
+    outline: none;
+}
+
+/* Button */
+button {
+    width: 100%;
+    background: #1abc9c;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #16a085;
+    transform: scale(1.05);
+}
+
+/* Back to Dashboard Link */
+a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #1abc9c;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .container {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    form {
+        width: 90%;
+    }
+}
