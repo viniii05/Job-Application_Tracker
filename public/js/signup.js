@@ -16,7 +16,7 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
 
     if (res.ok) {
         alert("Signup successful! You can now login.");
-        window.location.href = "/login.html"; // Redirect to login page
+        window.location.href = "/login.html"; 
     } else {
         alert(data.error);
     }

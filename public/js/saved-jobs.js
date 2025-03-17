@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadSavedJobs();
 });
 
-// Load Saved Jobs
 async function loadSavedJobs() {
     try {
         const res = await fetch("/api/saved-jobs", { method: "GET", credentials: "include" });
@@ -26,7 +25,6 @@ async function loadSavedJobs() {
     }
 }
 
-// Add Saved Job
 document.getElementById("job-form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -52,7 +50,6 @@ document.getElementById("job-form").addEventListener("submit", async (e) => {
     }
 });
 
-// Delete Saved Job
 async function deleteSavedJob(id) {
     try {
         const res = await fetch(`/api/saved-jobs/${id}`, { method: "DELETE", credentials: "include" });

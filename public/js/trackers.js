@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const res = await fetch("/jobs", { method: "GET", credentials: "include" });
         const data = await res.json();
 
-        console.log("🚀 Server Response:", data); // Debugging
+        console.log("🚀 Server Response:", data); 
 
         if (!res.ok) throw new Error(data.error || "Failed to load jobs");
         if (!data.jobs) throw new Error("API response does not contain 'jobs'");
@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
-// Add New Job
 document.getElementById("add-job-btn").addEventListener("click", () => {
     window.location.href = "/add-job.html";
 });

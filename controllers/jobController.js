@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 exports.addJob = async (req, res) => {
     try {
         const { companyName, position, status, applicationDate, followUpDate, notes } = req.body;
-        const userId = req.user.id; // Get logged-in user ID from JWT
+        const userId = req.user.id; 
         const attachmentUrl = req.file ? req.file.location : null;
 
         const job = await JobApplication.create({
@@ -28,7 +28,7 @@ exports.getAllJobs = async (req, res) => {
     try {
         const userId = req.user.id;
         const jobs = await JobApplication.findAll({ where: { userId } });
-        res.json({ jobs }); // ✅ CORRECT FORMAT
+        res.json({ jobs }); 
     } catch (error) {
         res.status(500).json({ error: "Server error" });
     }
@@ -102,7 +102,7 @@ exports.getReminders = async (req, res) => {
 
         res.json(reminders);
     } catch (error) {
-        console.error("❌ Error fetching reminders:", error); // <== Add this line
+        console.error("❌ Error fetching reminders:", error); 
 
         res.status(500).json({ error: "Server error" });
     }

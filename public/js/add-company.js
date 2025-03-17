@@ -16,7 +16,7 @@ document.getElementById("add-company-form").addEventListener("submit", async (e)
         const res = await fetch("/api/companies", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            credentials: "include", // Include auth cookies
+            credentials: "include", 
             body: JSON.stringify({ companyName, industry, companySize, location, notes }),
         });
 
@@ -24,7 +24,7 @@ document.getElementById("add-company-form").addEventListener("submit", async (e)
 
         if (res.ok) {
             alert("Company added successfully!");
-            window.location.href = "/dashboard.html";  // Redirect to dashboard
+            window.location.href = "/dashboard.html";  
         } else {
             alert(data.error || "Failed to add company");
         }

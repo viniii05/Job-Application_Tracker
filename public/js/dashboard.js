@@ -5,14 +5,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         await loadJobApplications();
         await loadReminders();
 
-        // Attach event listeners
         document.getElementById("search-btn").addEventListener("click", filterJobs);
         document.getElementById("search-input").addEventListener("input", filterJobs);
         document.getElementById("status-filter").addEventListener("change", filterJobs);
 
         document.getElementById("logout-btn").addEventListener("click", async () => {
             await fetch("/logout", { method: "GET", credentials: "include" });
-            window.location.href = "/login.html"; // Redirect to login
+            window.location.href = "/login.html";
         });
 
     } catch (error) {
@@ -20,13 +19,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
-// Store fetched jobs globally
 let allJobs = [];
 
-// Global Chart Instance
 let applicationChart = null;
 
-// ✅ Load Dashboard Stats & Render Chart
 async function loadDashboardStats() {
     try {
         const res = await fetch("/jobs/stats", { method: "GET", credentials: "include" });
@@ -37,13 +33,12 @@ async function loadDashboardStats() {
         document.getElementById("offer-count").textContent = stats.offerReceived;
         document.getElementById("rejection-count").textContent = stats.rejected;
 
-        renderChart(stats); // ✅ Call function to generate chart safely
+        renderChart(stats); 
     } catch (error) {
         console.error("❌ Error loading stats:", error.message);
     }
 }
 
-// ✅ Load Job Applications
 async function loadJobApplications() {
     try {
         const res = await fetch("/jobs", { method: "GET", credentials: "include" });
@@ -54,17 +49,15 @@ async function loadJobApplications() {
             return;
         }
 
-        allJobs = data.jobs; // Store all jobs globally
+        allJobs = data.jobs; 
         displayJobs(allJobs);
     } catch (error) {
         console.error("❌ Error loading job applications:", error.message);
     }
 }
-
-// ✅ Display Jobs in UI
 function displayJobs(jobs) {
     const jobList = document.getElementById("applications-list");
-    jobList.innerHTML = ""; // Clear existing content
+    jobList.innerHTML = ""; 
 
     if (jobs.length === 0) {
         jobList.innerHTML = "<li>No job applications found.</li>";
@@ -78,7 +71,6 @@ function displayJobs(jobs) {
     });
 }
 
-// ✅ Implement Search & Filter Functionality
 function filterJobs() {
     const searchInput = document.getElementById("search-input").value.toLowerCase();
     const statusFilter = document.getElementById("status-filter").value;
@@ -94,7 +86,6 @@ function filterJobs() {
     displayJobs(filteredJobs);
 }
 
-// ✅ Load Follow-Up Reminders
 async function loadReminders() {
     try {
         const res = await fetch("/jobs/reminders", { method: "GET", credentials: "include" });
@@ -113,16 +104,12 @@ async function loadReminders() {
     }
 }
 
-// ✅ Render Chart (Fixed)
 function renderChart(stats) {
     const ctx = document.getElementById("application-chart").getContext("2d");
 
-    // ✅ Destroy the existing chart before creating a new one
     if (applicationChart) {
         applicationChart.destroy();
     }
-
-    // ✅ Create a new Chart instance
     applicationChart = new Chart(ctx, {
         type: "pie",
         data: {

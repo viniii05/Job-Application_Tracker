@@ -36,13 +36,12 @@ async function deleteCompany(id) {
         const res = await fetch(`/api/companies/${id}`, { method: "DELETE", credentials: "include" });
         if (!res.ok) throw new Error("Failed to delete company");
 
-        location.reload(); // Refresh the page
+        location.reload();
     } catch (error) {
         console.error("❌ Delete Error:", error.message);
     }
 }
 
-// Redirect to Add Company Page
 document.getElementById("add-job-btn").addEventListener("click", () => {
     window.location.href = "/add-company.html";
 });
