@@ -20,6 +20,12 @@ const JobApplication = sequelize.define('JobApplication', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    maxSalary: {
+        type: DataTypes.FLOAT 
+    },
+    location: {
+        type: DataTypes.STRING
+    },
     status: {
         type: DataTypes.ENUM('Applied', 'Interview Scheduled', 'Offer Received', 'Rejected'),
         allowNull: false,

@@ -8,11 +8,11 @@ const User = sequelize.define('User', {
       allowNull: false,
       primaryKey: true
     },
-    firstName: { 
+    firstName: { // ✅ Fix: Use camelCase
         type: DataTypes.STRING,
         allowNull: false
     },
-    lastName: { 
+    lastName: { // ✅ Fix: Use camelCase
         type: DataTypes.STRING,
         allowNull: false
     },

@@ -35,6 +35,8 @@ document.getElementById("job-form").addEventListener("submit", async (e) => {
     const jobData = {
         companyName: document.getElementById("companyName").value,
         position: document.getElementById("position").value,
+        maxSalary: document.getElementById("maxSalary").value,
+        location: document.getElementById("location").value,
         status: document.getElementById("status").value,
         applicationDate: document.getElementById("applicationDate").value,
         followUpDate: document.getElementById("followUpDate").value,

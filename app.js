@@ -15,6 +15,16 @@ const savedJobRoutes = require("./routes/savedJobRoutes");
 
 const app = express();
 
+const helmet = require("helmet");
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            fontSrc: ["'self'", "data:"], // Allow fonts
+            styleSrc: ["'self'", "'unsafe-inline'"], // Allow inline styles
+        }
+    }
+}));
 cron.schedule("0 9 * * *", () => {
     console.log("⏰ Running daily email reminders...");
     sendReminderEmails();
@@ -26,14 +36,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname,'public')));
-app.use(express.static(path.join(__dirname, 'views')));
+app.use(express.static(path.join(__dirname, "views")));
 
-app.use('/', authRoutes);
-app.use('/', dashboardRoutes);
+app.use("/", authRoutes);
+app.use("/", dashboardRoutes);
 app.use('/', tracker)
 app.use('/api', userRoutes);
 app.use('/api', companiesRoutes);
-app.use('/api', savedJobRoutes);
+app.use("/api", savedJobRoutes);
 
 sequelize.sync()
   .then(() => {

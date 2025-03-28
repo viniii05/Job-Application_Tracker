@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         await loadJobApplications();
         await loadReminders();
 
-        document.getElementById("search-btn").addEventListener("click", filterJobs);
+        // document.getElementById("search-btn").addEventListener("click", filterJobs);
         document.getElementById("search-input").addEventListener("input", filterJobs);
         document.getElementById("status-filter").addEventListener("change", filterJobs);
 
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
     } catch (error) {
-        console.error("❌ Error initializing dashboard:", error.message);
+        console.error("Error initializing dashboard:", error.message);
     }
 });
 
@@ -35,7 +35,7 @@ async function loadDashboardStats() {
 
         renderChart(stats); 
     } catch (error) {
-        console.error("❌ Error loading stats:", error.message);
+        console.error("Error loading stats:", error.message);
     }
 }
 
@@ -45,14 +45,14 @@ async function loadJobApplications() {
         const data = await res.json();
 
         if (!data.jobs || !Array.isArray(data.jobs)) {
-            console.error("❌ API Error: Expected 'data.jobs' to be an array but got:", data);
+            console.error("API Error: Expected 'data.jobs' to be an array but got:", data);
             return;
         }
 
         allJobs = data.jobs; 
         displayJobs(allJobs);
     } catch (error) {
-        console.error("❌ Error loading job applications:", error.message);
+        console.error("Error loading job applications:", error.message);
     }
 }
 function displayJobs(jobs) {
@@ -100,7 +100,7 @@ async function loadReminders() {
             reminderList.appendChild(listItem);
         });
     } catch (error) {
-        console.error("❌ Error loading reminders:", error.message);
+        console.error("Error loading reminders:", error.message);
     }
 }
 

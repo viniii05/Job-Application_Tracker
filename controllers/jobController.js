@@ -3,32 +3,55 @@ const { Op } = require("sequelize");
 
 exports.addJob = async (req, res) => {
     try {
-        const { companyName, position, status, applicationDate, followUpDate, notes } = req.body;
-        const userId = req.user.id; 
-        const attachmentUrl = req.file ? req.file.location : null;
+        console.log("Received job data:", req.body);
+
+        const { companyName, position, maxSalary, location, status, applicationDate, followUpDate, notes } = req.body;
+        const userId = req.user.id;
+        const attachmentUrl = req.file?.location || null;
+
+        if (!companyName || !position || !applicationDate) {
+            return res.status(400).json({ error: "Missing required fields" });
+        }
+
+        // Validate and format dates
+        const formattedApplicationDate = applicationDate ? new Date(applicationDate) : null;
+        const formattedFollowUpDate = followUpDate ? new Date(followUpDate) : null;
+
+        // Check if date conversion resulted in 'Invalid Date'
+        if (isNaN(formattedApplicationDate.getTime())) {
+            return res.status(400).json({ error: "Invalid application date format" });
+        }
+
+        if (formattedFollowUpDate && isNaN(formattedFollowUpDate.getTime())) {
+            return res.status(400).json({ error: "Invalid follow-up date format" });
+        }
 
         const job = await JobApplication.create({
             userId,
             companyName,
             position,
+            maxSalary: maxSalary ? parseFloat(maxSalary) : null, // Ensure number format
+            location,
             status,
-            applicationDate,
-            followUpDate,
+            applicationDate: formattedApplicationDate, // Save valid date
+            followUpDate: formattedFollowUpDate, // Save valid date or null
             notes,
             attachmentUrl,
         });
 
         res.status(201).json({ message: "Job added successfully", job });
     } catch (error) {
-        res.status(500).json({ error: "Server error" });
+        console.error("Error in addJob:", error);
+        res.status(500).json({ error: "Server error", details: error.message });
     }
 };
+
 
 exports.getAllJobs = async (req, res) => {
     try {
         const userId = req.user.id;
         const jobs = await JobApplication.findAll({ where: { userId } });
-        res.json({ jobs }); 
+        res.json({ jobs }); // CORRECT FORMAT
     } catch (error) {
         res.status(500).json({ error: "Server error" });
     }
@@ -102,7 +125,7 @@ exports.getReminders = async (req, res) => {
 
         res.json(reminders);
     } catch (error) {
-        console.error("❌ Error fetching reminders:", error); 
+        console.error("Error fetching reminders:", error);
 
         res.status(500).json({ error: "Server error" });
     }

@@ -1,6 +1,5 @@
 const nodemailer = require("nodemailer");
 const JobApplication = require("../models/JobApplication");
-const User = require("../models/User"); // Import User model
 const { Op } = require("sequelize");
 
 const transporter = nodemailer.createTransport({
@@ -17,30 +16,23 @@ const sendReminderEmails = async () => {
         const jobs = await JobApplication.findAll({
             where: {
                 followUpDate: { [Op.lte]: today }
-            },
-            include: [{ model: User, attributes: ["email"] }] // Fetch user's email
+            }
         });
 
         for (const job of jobs) {
-            if (!job.User || !job.User.email) {
-                console.warn(`⚠️ No email found for job ID: ${job.id}`);
-                continue; // Skip if user email is missing
-            }
-
             const mailOptions = {
                 from: process.env.EMAIL_USER,
-                to: job.User.email, // Use the actual user’s email
+                to: "user@example.com", // Replace with actual user email
                 subject: "Job Application Follow-Up Reminder",
                 text: `Reminder: Follow up on your application for ${job.position} at ${job.companyName}.`
             };
 
             await transporter.sendMail(mailOptions);
-            console.log(`📧 Reminder sent to: ${job.User.email}`);
         }
 
-        console.log("✅ All reminders processed!");
+        console.log("Reminder emails sent!");
     } catch (error) {
-        console.error("❌ Error Sending Emails:", error);
+        console.error("Error Sending Emails:", error);
     }
 };
 
